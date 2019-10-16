@@ -1,1 +1,1 @@
-from .ffile import *
+from .ffile import Ffile
