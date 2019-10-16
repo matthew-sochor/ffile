@@ -83,3 +83,6 @@ or you can put those variables in a json file:
 or what about yaml:
 
 `ffile template.txt --yaml params.yaml`
+
+## Anything else?
+There are a couple of clever ways of calling this.  I think I found most of them, check out the tests!
