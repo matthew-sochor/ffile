@@ -86,3 +86,11 @@ or what about yaml:
 
 ## Anything else?
 There are a couple of clever ways of calling this.  I think I found most of them, check out the tests!
+
+## Any concerns?
+I know what you are thinking:
+
+"*Something... something...* **arbitrary code execution...**"
+  - you, maybe
+
+Probably.  Don't use this where you let just anyone write the template file.  Like, don't put this in front of a web form and let the internet run scripts.  Or other things I haven't thought of.  Don't do dumb things and it'll probably be fine.
