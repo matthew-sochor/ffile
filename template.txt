@@ -1,0 +1,7 @@
+{name} is a good developer!
+His kids love him deeply because he is an {adjective} father!
+
+They definitely do NOT say:
+
+"Hey {name.upper()}! you are {adjective.split(' ')[-1]} at parenting!"
+  - {name.lower()}'s kids, probably
