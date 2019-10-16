@@ -26,11 +26,11 @@ x = [
 print("\n".join(x))
 ```
 
-yikes! Harsh f-string! And that did a real weird thing with new-lines.
+Yikes! Harsh f-string! And that did a real weird thing with new-lines.
 
 Also, what if you want to parameterize a long file?  Several hundred or thousand lines?  
 
-## F-strings on a file would be ice cold 
+## F-strings on a file would be cool
 Lets throw that text into a file, lets call it "template.txt" which coincidentally exists in this very repository:
 
 ```
@@ -44,8 +44,6 @@ They definitely do NOT say:
 ```
 
 Boy it would be cool to take a big complex document, parametrize it like an f-string, and even run some simple python in it!
-
-*Ffile has entered the chat*
 
 ```python
 from ffile import Ffile
