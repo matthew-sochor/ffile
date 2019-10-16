@@ -10,33 +10,31 @@ class Ffile:
     """Ffile applies f-string syntax to a file
     """
 
-    def __init__(self, file_name: Union[str, Path], local_vals: Dict):
+    def __init__(self, file_name: Union[str, Path]):
         """Initialize Ffile
         
         Arguments:
             file_name {Union[str, Path]} -- File to read and interpolate as an f-string
-            local_vals {Dict} -- Values to use in interpolation
         """
         with open(file_name, "r") as fp:
             self.string = fp.readlines()
-        self.locals = local_vals
 
-    def f(self) -> str:
+    def f(self, **kwargs) -> str:
         """Format the FFile
         
         Returns:
             [str] -- f-string formatted file
         """
-        locals().update(self.locals)
         _formatted = []
+        locals().update(kwargs)
         for _line in self.string:
             _formatted.append(eval(f"f'''{_line}'''"))
         return "".join(_formatted)
 
-    def print(self):
+    def print(self, **kwargs):
         """Format and print the FFile
         """
-        print(self.f())
+        print(self.f(**kwargs))
 
 
 def cli():
@@ -96,7 +94,6 @@ def cli():
             raise SyntaxError(
                 "Incorrect 2nd argument, must be one of --vars --json or --yaml, please type 'ffile -h' for help"
             )
-
-        template = Ffile(sys.argv[1], params)
-        template.print()
+        template = Ffile(sys.argv[1])
+        template.print(**params)
 
