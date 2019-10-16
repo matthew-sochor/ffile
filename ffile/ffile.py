@@ -2,23 +2,46 @@ import sys
 import os
 import yaml
 import json
+from typing import Union, Dict
+from pathlib import Path
 
 
 class Ffile:
-    def __init__(self, file_name, local_vals):
+    """Ffile applies f-string syntax to a file
+    """
+
+    def __init__(self, file_name: Union[str, Path], local_vals: Dict):
+        """Initialize Ffile
+        
+        Arguments:
+            file_name {Union[str, Path]} -- File to read and interpolate as an f-string
+            local_vals {Dict} -- Values to use in interpolation
+        """
         with open(file_name, "r") as fp:
             self.string = fp.readlines()
         self.locals = local_vals
 
-    def f(self):
+    def f(self) -> str:
+        """Format the FFile
+        
+        Returns:
+            [str] -- f-string formatted file
+        """
         locals().update(self.locals)
         _formatted = []
         for _line in self.string:
             _formatted.append(eval(f"f'''{_line}'''"))
         return "".join(_formatted)
 
+    def print(self):
+        """Format and print the FFile
+        """
+        print(self.f())
+
 
 def cli():
+    """Command line interface for Ffile (ffile)
+    """
     if len(sys.argv) == 1 or sys.argv[1] == "-h" or sys.argv[1] == "--help":
         print("Usage:")
         print("")
@@ -75,5 +98,5 @@ def cli():
             )
 
         template = Ffile(sys.argv[1], params)
-        print(template.f())
+        template.print()
 
