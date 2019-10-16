@@ -2,7 +2,7 @@ from setuptools import find_packages, setup
 
 setup(
     name="ffile",
-    version="1.2",
+    version="2.0.0",
     description="F-strings for a whole file.",
     author="Matthew Sochor",
     author_email="matthew.sochor@gmail.com",
