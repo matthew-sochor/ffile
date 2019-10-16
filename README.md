@@ -15,20 +15,22 @@ print(x)
 
 but multi-line f-strings are U-G-L-Y
 ```python
-name = 'Matt'
-adjective = 'mediocre'
-x = (
-    f'{name} is the name of some Browns fan. A {adjective} football team.\n',
-    'LAME\n'
-    'Not only that,\n'
-    f'This dude {name.upper()} sounds like a {adjective.upper()} father!'
-)
-print(x)
+name = "Matt"
+adjective = "mediocre"
+x = [
+    f"{name} is the name of some Browns fan. And they are a {adjective} football team.",
+    "LAME!",
+    "Not only that,"
+    f"This dude {name.upper()} sounds like a {adjective.upper()} father!",
+]
+print("\n".join(x))
 ```
 
-yikes! Harsh f-string! And that did a real weird thing with new-lines
+yikes! Harsh f-string! And that did a real weird thing with new-lines.
 
-## THIS IS WHAT THIS IS
+Also, what if you want to parameterize a long file?  Several hundred or thousand lines?  
+
+## F-strings on a file would be ice cold 
 Lets throw that text into a file, lets call it "template.txt" which coincidentally exists in this very repository:
 
 ```
