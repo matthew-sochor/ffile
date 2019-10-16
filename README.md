@@ -51,10 +51,11 @@ Boy it would be cool to take a big complex document, parametrize it like an f-st
 from ffile import Ffile
 params = {'name': 'Matt', 'adjective': 'not bad'}
 template = Ffile('template.txt', params)
-template.print()
+templated_file = template.f()
+print(templated_file)
 ```
 
-or maybe call it from local variables, which is a little closer to what you maybe expect from an f-string
+or maybe call it from local variables, which is a little closer to what you maybe expect from an f-string.  Also, maybe just do that format and print in one step.
 
 ```python
 from ffile import Ffile

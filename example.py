@@ -22,7 +22,8 @@ from ffile import Ffile
 
 params = {"name": "Matt", "adjective": "not bad"}
 template = Ffile("template.txt", params)
-template.print()
+templated_file = template.f()
+print(templated_file)
 
 print("Say it louder for the people in the back!")
 print("")
