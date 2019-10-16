@@ -1,5 +1,7 @@
 import sys
 import os
+import yaml
+import json
 
 
 class Ffile:
@@ -20,20 +22,58 @@ def cli():
     if len(sys.argv) == 1 or sys.argv[1] == "-h" or sys.argv[1] == "--help":
         print("Usage:")
         print("")
-        print("ffile your_template_file key1=value key2=value")
+        print("Supply variables with key=value pairs")
+        print("")
+        print("ffile your_template_file --vars key1=value key2=value")
+        print("")
+        print("Or supply variables in a json file")
+        print("")
+        print("ffile your_template_file --json params.json")
+        print("")
+        print("Or supply variables in a yaml file")
+        print("")
+        print("ffile your_template_file --json params.json")
         return
 
-    for arg in sys.argv:
-        if arg.find("=") > 0:
-            try:
-                exec(arg)
-            except NameError:
-                # If the key should be a string, it will throw a NameError
-                key, val = arg.split("=")
-                exec(f'{key} = "{val}"')
+    if os.path.exists(sys.argv[1]) == False:
+        raise FileNotFoundError(f"Template file does not exist: {sys.argv[1]}")
 
-    if os.path.exists(sys.argv[1]):
-        template = Ffile(sys.argv[1], locals())
-        print(template.f())
+    if len(sys.argv) < 3:
+        raise SyntaxError("Incorrect arguments, please type 'ffile -h' for help")
     else:
-        print(f"{sys.argv[1]} is not a valid file path")
+        if sys.argv[2] == "--vars":
+            params = {}
+            for arg in sys.argv[3:]:
+                if arg.find("=") > 0:
+                    key, val = arg.split("=")
+                    try:
+                        exec(f"params['{key}'] = {val}")
+                    except NameError:
+                        # If the key should be a string, it will throw a NameError
+                        exec(f"params['{key}'] = '{val}'")
+
+                else:
+                    raise SyntaxError(
+                        "--vars input should be key=value pairs.  Missing ="
+                    )
+
+        elif sys.argv[2] == "--json":
+            if os.path.exists(sys.argv[3]) == False:
+                raise FileNotFoundError(f"Json file does not exist: {sys.argv[3]}")
+            else:
+                with open(sys.argv[3], "r") as fp:
+                    params = json.load(fp)
+        elif sys.argv[2] == "--yaml":
+            if os.path.exists(sys.argv[3]) == False:
+                raise FileNotFoundError(f"Yaml file does not exist: {sys.argv[3]}")
+            else:
+                with open(sys.argv[3], "r") as fp:
+                    params = yaml.load(fp, Loader=yaml.FullLoader)
+        else:
+            raise SyntaxError(
+                "Incorrect 2nd argument, must be one of --vars --json or --yaml, please type 'ffile -h' for help"
+            )
+
+        template = Ffile(sys.argv[1], params)
+        print(template.f())
+
