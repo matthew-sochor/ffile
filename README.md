@@ -9,33 +9,34 @@ You can do a single line f-strings like this:
 
 ```python
 name = 'Matt'
-x = f'{name} is not the name of a good developer'
-print(x)
+print(f"{name} is not the name of a good developer")
 ```
 
-but multi-line f-strings are U-G-L-Y
+*sublime*
+
+but multi-line f-strings are ugly:
 ```python
 name = "Matt"
 adjective = "mediocre"
-x = [
+lines = [
     f"{name} is the name of some Browns fan. And they are a {adjective} football team.",
     "LAME!",
     "Not only that,"
     f"This dude {name.upper()} sounds like a {adjective.upper()} father!",
 ]
-print("\n".join(x))
+print("\n".join(lines))
 ```
 
-Yikes! Harsh f-string! And that did a real weird thing with new-lines.
+Yikes! Harsh f-string! And that needed a real weird thing with new-lines.
 
-Also, what if you want to parameterize a long file?  Several hundred or thousand lines?  
+Also, what if you want to parameterize a long file?  Several hundred or thousand lines? No thanks. 
 
 ## F-strings on a file would be cool
 Lets throw that text into a file, lets call it "template.txt" which coincidentally exists in this very repository:
 
 ```
 {name} is a good developer!
-His kids love him deeply because he is an {adjective} father!
+His kids love him deeply because he is a {adjective} father!
 
 They definitely do NOT say:
 
@@ -46,21 +47,16 @@ They definitely do NOT say:
 Boy it would be cool to take a big complex document, parametrize it like an f-string, and even run some simple python in it!
 
 ```python
-from ffile import Ffile
-params = {'name': 'Matt', 'adjective': 'not bad'}
-template = Ffile('template.txt', params)
-templated_file = template.f()
-print(templated_file)
+template = Ffile("template.txt")
+template.print(name="Matt", adjective="not bad")
 ```
 
-or maybe call it from local variables, which is a little closer to what you maybe expect from an f-string.  Also, maybe just do that format and print in one step.
+*sublime*
+
+Also, maybe just do don't want to print, and you just want that formatted string
 
 ```python
-from ffile import Ffile
-name = 'Matt'
-adjective = 'not bad'
-template = Ffile('template.txt', locals())
-template.print()
+formatted = template.f(name="Matt", adjective="not bad")
 ```
 
 don't believe me?  Well pip install this package:
