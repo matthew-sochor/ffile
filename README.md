@@ -53,7 +53,7 @@ template.print(name="Matt", adjective="not bad")
 
 *sublime*
 
-Also, maybe just do don't want to print, and you just want that formatted string
+Also, maybe just you don't want to print but instead you want that formatted string
 
 ```python
 formatted = template.f(name="Matt", adjective="not bad")
